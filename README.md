@@ -1,19 +1,34 @@
 # Arduino-LED-blink-pattern-assembly-
 This project implements a simple LED-sequence on an Arduino Uno R3 using the AVR-Assembler Language.
-My goal was to get a deeper understanding of the internal workings of the Processor without the assistence of modern libarys or languages.
+My goal was to get a deeper understanding of the internal workings of the Processor without the assistance of modern libaries or languages.
 
-**Functions**
-- LED connected to digital PIN 12 gets turned on and off in a pre-determined pattern between 250 ms and 2 s with 250 ms increments
-- Self coded **delay** function with minimal overhead. Mathematically the difference should be less than 0.05% (based on instruction cycle counting)
-- The pattern starts with 1s on and 1s off then both the time off and on going up 250ms until it reaches 2s and going back
-  down in steps in 250ms until the time on and off are both 250ms. Then it resets and starts at 1s again.
+## What It Does
 
-**Used Hardware**
+The LED follows a dynamic pattern that gradually changes timing:
+- Starts blinking at 1 second ON / 1 second OFF
+- Gradually increases to 2 seconds ON / 2 seconds OFF (in 250ms steps)
+- Then decreases back down to 250ms ON / 250ms OFF
+- Resets and repeats
+  
+##Implementation
+- The main logic is written in AVR Assembly(main.S), with a minimal C++ wrapper(Arduino_IDEstarter.ino) to upload it with the Arduino IDE
+
+**To run this project:**
+1. Open the [.ino script in /code](code/Arduino_IDEstarter.ino) and the [Assembly script in /code](code/main.S) in the Arduino IDE (as one project)
+2. Upload it to the Arduino Uno R3
+
+**Assembly highlights:**
+- Direct port manipulation (DDRB, PORTB registers)
+- Custom nested-loop delay function optimized for 16MHz clock
+- State machine for counting up/down through timing intervals
+- Disabled interrupts for timing precision
+
+##Used Hardware
 - Arduino Uno R3
 - 1xLED
 - 1x 220Ω Pull-down resistor
 
-**Setup**
-Heres the setup of the electircal circuit and a demo of the blinking sequence:
+##Setup
+Heres the setup of the electrical circuit and a demo of the Blinking sequence:
 - ![Setup Photo](media/setup_photo.jpg)
 -  ![Binking sequence demo video](media/blink_demo.mp4)
