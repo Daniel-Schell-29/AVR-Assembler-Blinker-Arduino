@@ -15,5 +15,5 @@ My goal was to get a deeper understanding of the internal workings of the Proces
 
 **Setup**
 Heres the setup of the electircal circuit and a demo of the blinking sequence:
-- ![Setup Photo](media/setup_photo.jpeg)
+- ![Setup Photo](media/setup_photo.jpg)
 -  ![Binking sequence demo video](media/blink_demo.mp4)
