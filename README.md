@@ -10,7 +10,7 @@ The LED follows a dynamic pattern that gradually changes timing:
 - Then decreases back down to 250ms ON / 250ms OFF
 - Resets and repeats
   
-##Implementation
+**Implementation**
 - The main logic is written in AVR Assembly(main.S), with a minimal C++ wrapper(Arduino_IDEstarter.ino) to upload it with the Arduino IDE
 
 **To run this project:**
@@ -23,12 +23,12 @@ The LED follows a dynamic pattern that gradually changes timing:
 - State machine for counting up/down through timing intervals
 - Disabled interrupts for timing precision
 
-##Used Hardware
+**Used Hardware**
 - Arduino Uno R3
 - 1xLED
 - 1x 220Ω Pull-down resistor
 
-##Setup
+**Setup**
 Heres the setup of the electrical circuit and a demo of the Blinking sequence:
 - ![Setup Photo](media/setup_photo.jpg)
 -  ![Binking sequence demo video](media/blink_demo.mp4)
