@@ -4,9 +4,9 @@
 .global main_asm
 
 main_asm:
-    cli                     ;deactivate interuppts
+    cli                     ;disable interrupts for precise timing
 
-    ldi     r17,    1 << 4  ;Bitmask for PB5
+    ldi     r17,    1 << 4  ;Bitmask for PB4
     out     0x04,   r17
 
 counter_led:                ;used for counting r18 intervalls 4->8->1
@@ -19,7 +19,7 @@ loop:
     out     0x05,   r17     ;Turn on LED
 
     push    r21
-    MOV     r21,    r18
+    mov     r21,    r18
 delay_LEDon:
     rcall   delay           ;call delay subroutine
     dec     r21     
@@ -30,7 +30,7 @@ delay_LEDon:
     out     0x05,   r17     ;Turn off LED
 
     push    r21
-    MOV     r21,    r18
+    mov     r21,    r18
 
 delay_LEDoff:
     rcall   delay           ;call delay subroutine
@@ -79,7 +79,7 @@ delay:
 counter_delay:
     ldi     r17,    16
 outer_delay:
-    ldi     r22,    249     ;not 255 to account for overhead from loops(calculated!)
+    ldi     r22,    249     ;not 255 to account for overhead from loops(calculated!)    ; CPU runs at 16mhz
 
 inner_delay:
     nop                     ; No operation              ;+1 cycle
@@ -90,8 +90,8 @@ inner_delay:
     brne    outer_delay     ; Branch if not zero        ;+2 cycles if taken, +1 if not
     dec     r20             ; Decrement copy of r16     ;+1 cycle
     brne    counter_delay   ; Branch if not zero        ;+2 cycles if taken, +1 if not
+    pop     r20           
     pop     r22             
-    pop     r17             
-    pop     r20
+    pop     r17
     ret
 ;---------------------------------------------
